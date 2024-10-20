@@ -4,6 +4,9 @@ using HtmlAgilityPack;
 
 namespace ReverseMarkdown.Converters
 {
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.Converter]
+#endif
     public class Div : ConverterBase
     {
         public Div(Converter converter) : base(converter)

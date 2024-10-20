@@ -5,6 +5,9 @@ using HtmlAgilityPack;
 
 namespace ReverseMarkdown.Converters
 {
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.Converter]
+#endif
     public class Blockquote : ConverterBase
     {
         public Blockquote(Converter converter) : base(converter)

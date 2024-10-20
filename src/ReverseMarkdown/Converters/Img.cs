@@ -2,6 +2,9 @@
 
 namespace ReverseMarkdown.Converters
 {
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.Converter]
+#endif
     public class Img : ConverterBase
     {
         public Img(Converter converter) : base(converter)

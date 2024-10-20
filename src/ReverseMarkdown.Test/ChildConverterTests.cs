@@ -1,4 +1,5 @@
 ﻿using ReverseMarkdown.Converters;
+using ReverseMarkdown.SourceGenerator;
 using ReverseMarkdown.Test.Children;
 
 using System;
@@ -17,7 +18,7 @@ namespace ReverseMarkdown.Test
         [Fact]
         public void WhenConverter_A_IsReplacedByConverter_IgnoreAWhenHasClass()
         {
-            var converter = new ReverseMarkdown.Converter(new Config(), typeof(IgnoreAWhenHasClass).Assembly);
+            var converter = new ReverseMarkdown.Converter(new Config(), TestConverterTypesInfo.ConverterTypes);
 
             var type = converter.GetType();
             var prop = type.GetField("Converters", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -38,4 +39,7 @@ namespace ReverseMarkdown.Test
             Assert.Contains(typeof(IgnoreAWhenHasClass), converters);
         }
     }
+
+    [ConverterTypesInfo]
+    internal static partial class TestConverterTypesInfo { }
 }

@@ -6,6 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace ReverseMarkdown.Converters
 {
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.Converter]
+#endif
     public class Td : ConverterBase
     {
         public Td(Converter converter) : base(converter)

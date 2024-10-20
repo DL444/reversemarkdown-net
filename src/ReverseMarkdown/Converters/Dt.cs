@@ -3,6 +3,9 @@ using HtmlAgilityPack;
 
 namespace ReverseMarkdown.Converters
 {
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.Converter]
+#endif
     public class Dt : ConverterBase
     {
         public Dt(Converter converter) : base(converter)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -17,8 +18,16 @@ namespace ReverseMarkdown
 
         public Converter() : this(new Config()) {}
 
-        public Converter(Config config) : this(config, null) {}
+        public Converter(Config config)
+#if SOURCE_GENERATOR_AVAILABLE
+            : this(config, InboxConverterTypesInfo.ConverterTypes) {}
+#else
+            : this(config, default(Assembly[])) {}
+#endif
 
+#if NET7_0_OR_GREATER
+        [RequiresUnreferencedCode("This API performs run-time reflection on assembles and is therefore incompatible with trimming.")]
+#endif
         public Converter(Config config, params Assembly[] additionalAssemblies)
         {
             Config = config;
@@ -65,6 +74,40 @@ namespace ReverseMarkdown
             foreach (var converterType in types)
                 // ... activate them
                 Activator.CreateInstance(converterType, this);
+
+            // register the unknown tags converters
+            PassThroughTagsConverter = new PassThrough(this);
+            DropTagsConverter = new Drop(this);
+            ByPassTagsConverter = new ByPass(this);
+        }
+
+        public Converter(Config config, params IEnumerable<ConverterType>[] converterTypes)
+        {
+            Config = config;
+            var types = new List<ConverterType>();
+            // instantiate all converters excluding the unknown tags converters
+            foreach (var ct in converterTypes.SelectMany(x => x))
+            {
+                if (ct.Type == typeof(PassThrough) || ct.Type == typeof(Drop) || ct.Type == typeof(ByPass))
+                {
+                    continue;
+                }
+                if (types.Any(e => ct.Type.IsAssignableFrom(e.Type)))
+                {
+                    continue;
+                }
+                var toRemove = types.FirstOrDefault(e => e.Type.IsAssignableFrom(ct.Type));
+                if (!(toRemove is null))
+                {
+                    types.Remove(toRemove);
+                }
+                types.Add(ct);
+            }
+
+            // For each type to register ...
+            foreach (var converterType in types)
+                // ... activate them
+                Activator.CreateInstance(converterType.Type, this);
 
             // register the unknown tags converters
             PassThroughTagsConverter = new PassThrough(this);
@@ -128,4 +171,9 @@ namespace ReverseMarkdown
             }
         }
     }
+
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.ConverterTypesInfo]
+    internal static partial class InboxConverterTypesInfo { }
+#endif
 }

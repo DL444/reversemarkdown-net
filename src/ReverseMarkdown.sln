@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseMarkdown", "ReverseMarkdown\ReverseMarkdown.csproj", "{518A6D79-4596-4086-BA5D-DD353BCEC9A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReverseMarkdown", "ReverseMarkdown\ReverseMarkdown.csproj", "{518A6D79-4596-4086-BA5D-DD353BCEC9A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseMarkdown.Test", "ReverseMarkdown.Test\ReverseMarkdown.Test.csproj", "{1756FE48-2619-459C-A0D0-2D2A1D163A03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReverseMarkdown.Test", "ReverseMarkdown.Test\ReverseMarkdown.Test.csproj", "{1756FE48-2619-459C-A0D0-2D2A1D163A03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseMarkdown.SourceGenerator", "ReverseMarkdown.SourceGenerator\ReverseMarkdown.SourceGenerator.csproj", "{A0608A43-8F6C-4E7B-AEB7-B0D77611C800}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{1756FE48-2619-459C-A0D0-2D2A1D163A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1756FE48-2619-459C-A0D0-2D2A1D163A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1756FE48-2619-459C-A0D0-2D2A1D163A03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0608A43-8F6C-4E7B-AEB7-B0D77611C800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0608A43-8F6C-4E7B-AEB7-B0D77611C800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0608A43-8F6C-4E7B-AEB7-B0D77611C800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0608A43-8F6C-4E7B-AEB7-B0D77611C800}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54FEC177-0617-426D-B743-020B46189EE3}
 	EndGlobalSection
 EndGlobal

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ReverseMarkdown.Converters
 {
+#if SOURCE_GENERATOR_AVAILABLE
+    [SourceGenerator.Converter]
+#endif
     public class Code : ConverterBase
     {
         public Code(Converter converter) : base(converter)

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ReverseMarkdown.Test.Children
 {
+    [SourceGenerator.Converter]
     internal class IgnoreAWhenHasClass : A
     {
         private readonly string _ignore = "ignore";
